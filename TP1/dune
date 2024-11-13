@@ -1,8 +1,8 @@
 (ocamllex lexer)
 
 ;; A décommenter à partir de l'exercice 2
-;;(menhir
-;; (modules parser))
+(menhir
+(modules parser))
 
 (library
  (name tp1)

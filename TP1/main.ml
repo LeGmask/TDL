@@ -23,7 +23,7 @@ let%test _ = try
               let _ = (analyse_lexicale "interface-echec-lexical.txt") in false
             with _ -> true
 
-(*
+
 (**** Exercice 2 ****)
 
 (* Exception d'erreur syntaxique avec message explicatif. *)
@@ -53,11 +53,11 @@ let%test_unit _ = (analyse_syntaxique "interface-echec-semantique.txt")
 let%test _ = try
                 let _ = (analyse_syntaxique "interface-echec-syntaxique.txt") in false
               with _ -> true
-*)
+
 
 (**** Exercice 3 ****)
 
-(*
+
 
 (* analyse_semantique : string -> string list * string list *)
 (* Vérifie que le fichier est conforme à la grammaire décrite dans le fichier parser.mly *)
@@ -85,4 +85,4 @@ let%test _ =
 let%test _ =
   let (li,la) = analyse_semantique "interface-echec-semantique.txt" in
   not (verifier li la )
-*)
+

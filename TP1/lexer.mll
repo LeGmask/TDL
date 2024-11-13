@@ -1,5 +1,6 @@
 {
-type token = ID of string | AUTO  | IFACE | INET | EOF (* A COMPLETER *)
+(* type token = ID of string | AUTO  | IFACE | INET | LOOPBACK | DHCP | STATIC | ADDRESS | NETMASK | GATEWAY | IP_ADDR | EOF (* A COMPLETER *) *)
+open Parser
 
 exception Error of string
 }
@@ -8,6 +9,9 @@ exception Error of string
 let blanc = [' ' '\t' '\n']
  (* À compléter éventuellement *)
 
+let nb = ['0'-'9'] | (['1'-'9'] ['0'-'9']) | ('1'['0'-'9']['0'-'9']) | ('2'['0'-'4']['0'-'9']) | ("25"['0'-'5'])
+let adresse = nb '.' nb '.' nb '.' nb
+let nom = ['a'-'z']+ ['A'-'Z''a'-'z''0'-'9']*
 
 (* Règles léxicales *)
 rule interface = parse
@@ -19,7 +23,22 @@ rule interface = parse
     { IFACE }
 | "inet"
     { INET }
-(* A COMPLETER *)
+| "loopback"
+    { LOOPBACK }
+| "dhcp"
+    { DHCP }
+| "static" 
+    { STATIC }
+| "netmask"
+    { NETMASK }
+| "gateway"
+    { GATEWAY }
+| "address"
+    { ADDRESS }
+| adresse
+    { IP_ADDR }
+| nom as interface_name 
+    { ID interface_name}
 | eof
     { EOF }
 | _
